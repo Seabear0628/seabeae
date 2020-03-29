@@ -1,0 +1,136 @@
+local uis = game:GetService("UserInputService")
+local wp = game:GetService("Workspace")
+local rs =  game:GetService("ReplicatedStorage")
+local lgt = game:GetService("Lighting")
+local plrs = game:GetService("Players")
+local lplr = game:GetService("Players").LocalPlayer
+local mouse = lplr:GetMouse()
+
+local count = 0
+
+function esp()
+
+for _, o in pairs(plrs:GetPlayers()) do
+if o.Character ~= nil then
+for _, l in pairs(o.Character.Head:GetChildren()) do
+if l.Name == ("EGUI") then
+l:Destroy()
+end
+end
+end
+end
+
+local faces = {"Back","Bottom","Front","Left","Right","Top"}
+for _, v in pairs(plrs:GetPlayers()) do
+if v.Name ~= lplr.Name then
+if v.Character ~= nil then
+if not v.Character.Head:FindFirstChild("EGUI") then
+if v.Name == tostring(wp.Status.HasBomb.Value) then
+local bgui = Instance.new("BillboardGui",v.Character.Head)
+bgui.Name = ("EGUI")
+bgui.AlwaysOnTop = true
+bgui.ExtentsOffset = Vector3.new(0,3,0)
+bgui.Size = UDim2.new(0,200,0,50)
+local nam = Instance.new("TextLabel",bgui)
+nam.Text = (v.Name .. " has C4")
+nam.BackgroundTransparency = 1
+nam.TextSize = 14
+nam.Font = ("Arial")
+nam.TextColor3 = Color3.fromRGB(245, 205, 48)
+nam.Size = UDim2.new(0,200,0,50)
+for _, p in pairs(v.Character:GetChildren()) do
+if p.Name == ("Head") then
+for _, f in pairs(faces) do
+local m = Instance.new("SurfaceGui",p)
+m.Name = ("EGUI")
+m.Face = f
+m.Active      = true
+m.AlwaysOnTop = true
+local mf = Instance.new("Frame",m)
+mf.Size = UDim2.new(1,0,1,0)
+mf.BorderSizePixel = 0
+mf.BackgroundTransparency = 0.5
+mf.BackgroundColor3 = Color3.fromRGB(245, 205, 48)
+end
+end
+end
+elseif tostring(v.Team) == "Terrorists" then
+local bgui = Instance.new("BillboardGui",v.Character.Head)
+bgui.Name = ("EGUI")
+bgui.AlwaysOnTop = true
+bgui.ExtentsOffset = Vector3.new(0,3,0)
+bgui.Size = UDim2.new(0,200,0,50)
+local nam = Instance.new("TextLabel",bgui)
+nam.Text = v.Name
+nam.BackgroundTransparency = 1
+nam.TextSize = 14
+nam.Font = ("Arial")
+nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+nam.Size = UDim2.new(0,200,0,50)
+for _, p in pairs(v.Character:GetChildren()) do
+if p.Name == ("Head") then
+for _, f in pairs(faces) do
+local m = Instance.new("SurfaceGui",p)
+m.Name = ("EGUI")
+m.Face = f
+m.Active      = true
+m.AlwaysOnTop = true
+local mf = Instance.new("Frame",m)
+mf.Size = UDim2.new(1,0,1,0)
+mf.BorderSizePixel = 0
+mf.BackgroundTransparency = 0.5
+mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+end
+end
+end
+elseif tostring(v.Team) == "Counter-Terrorists" then
+local bgui = Instance.new("BillboardGui",v.Character.Head)
+bgui.Name = ("EGUI")
+bgui.AlwaysOnTop = true
+bgui.ExtentsOffset = Vector3.new(0,3,0)
+bgui.Size = UDim2.new(0,200,0,50)
+local nam = Instance.new("TextLabel",bgui)
+nam.Text = v.Name
+nam.BackgroundTransparency = 1
+nam.TextSize = 14
+nam.Font = ("Arial")
+nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+nam.Size = UDim2.new(0,200,0,50)
+for _, p in pairs(v.Character:GetChildren()) do
+if p.Name == ("Head") then
+for _, f in pairs(faces) do
+local m = Instance.new("SurfaceGui",p)
+m.Name = ("EGUI")
+m.Face = f
+m.Active      = true
+m.AlwaysOnTop = true
+local mf = Instance.new("Frame",m)
+mf.Size = UDim2.new(1,0,1,0)
+mf.BorderSizePixel = 0
+mf.BackgroundTransparency = 0.5
+mf.BackgroundColor3 = Color3.fromRGB(13, 105, 172)
+end
+end
+end
+end
+end
+end
+end
+end
+end
+
+mouse.KeyDown:connect(function(keyDown)
+if keyDown == "a" or keyDown == "s" or keyDown == "d" or keyDown == "w" then
+if count == 0 then
+esp()
+count = 2
+else
+count = count - 1
+end
+end
+
+if keyDown == "l" then
+esp()
+end
+
+end)
